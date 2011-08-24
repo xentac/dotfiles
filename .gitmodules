@@ -7,3 +7,6 @@
 [submodule "vim/bundle/gundo"]
 	path = vim/bundle/gundo
 	url = https://github.com/sjl/gundo.vim.git
+[submodule "vim/bundle/TaskList"]
+	path = vim/bundle/TaskList
+	url = https://github.com/vim-scripts/TaskList.vim.git

@@ -109,3 +109,6 @@ set spelllang=en_ca
 
 " Toggle Gundo with F5
 nnoremap <F5> :GundoToggle<CR>
+
+" Make ,td open the Task List
+map <leader>td <Plug>TaskList
