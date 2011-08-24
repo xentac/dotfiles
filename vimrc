@@ -107,5 +107,5 @@ nmap <silent> <leader>s :set spell!<CR>
 " Canadian spelling
 set spelllang=en_ca
 
-" vim: sw=4 ts=4 et sta
-
+" Toggle Gundo with F5
+nnoremap <F5> :GundoToggle<CR>
