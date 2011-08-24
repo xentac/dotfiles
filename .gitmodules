@@ -10,3 +10,12 @@
 [submodule "vim/bundle/TaskList"]
 	path = vim/bundle/TaskList
 	url = https://github.com/vim-scripts/TaskList.vim.git
+[submodule "vim/bundle/supertab"]
+	path = vim/bundle/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "vim/bundle/pydoc"]
+	path = vim/bundle/pydoc
+	url = https://github.com/fs111/pydoc.vim.git
+[submodule "vim/bundle/snipmate"]
+	path = vim/bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim.git
