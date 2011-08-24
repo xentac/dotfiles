@@ -95,6 +95,9 @@ au BufEnter *.py call FixFatboyEnv()
 au BufEnter *.js call FixFatboyEnv()
 au BufEnter *.css call FixFatboyEnv()
 
+" Set the filetype of *.kid to xhtml
+au BufRead *.kid set ft=xhtml
+
 " coffee, cake, and json files only have 2 spaces
 au BufEnter *.coffee,Cakefile,*.json set ts=2 sw=2 sts=2
 
