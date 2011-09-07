@@ -52,6 +52,7 @@ set list listchars=tab:»\ ,trail:·,extends:…,nbsp:‗
 
 " Hide pyc and swp files
 let g:netrw_list_hide='\.pyc$,\.swp$'
+set wildignore=*.swp,*.bak,*.pyc
 
 " Remap W, Wq, and WQ to their respective lowercase options
 command W :w
@@ -115,3 +116,6 @@ nnoremap <F5> :GundoToggle<CR>
 
 " Make ,td open the Task List
 map <leader>td <Plug>TaskList
+
+" Toggle nerdtree with ,n
+map <leader>n :NERDTreeToggle<CR>
