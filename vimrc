@@ -119,3 +119,15 @@ map <leader>td <Plug>TaskList
 
 " Toggle nerdtree with ,n
 map <leader>n :NERDTreeToggle<CR>
+
+" Allow ctrl-j, ctrl-k, etc for window movement
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+" Allow ctrl-left, ctrl-right, etc for window movement
+map <c-Down> <c-w>j
+map <c-Up> <c-w>k
+map <c-Right> <c-w>l
+map <c-Left> <c-w>h
