@@ -131,3 +131,6 @@ map <c-Down> <c-w>j
 map <c-Up> <c-w>k
 map <c-Right> <c-w>l
 map <c-Left> <c-w>h
+
+" Let modified but unsaved buffers be hidden
+set hidden
