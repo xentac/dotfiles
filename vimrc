@@ -134,3 +134,6 @@ map <c-Left> <c-w>h
 
 " Let modified but unsaved buffers be hidden
 set hidden
+
+" Open taglist with F8
+map <F8> :TlistToggle<CR>
