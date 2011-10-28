@@ -28,9 +28,6 @@
 [submodule "vim/bundle/jade"]
 	path = vim/bundle/jade
 	url = https://github.com/digitaltoad/vim-jade.git
-[submodule "vim/bundle/TabBar"]
-	path = vim/bundle/TabBar
-	url = https://github.com/vim-scripts/TabBar.git
 [submodule "vim/bundle/indent-object"]
 	path = vim/bundle/indent-object
 	url = https://github.com/michaeljsmith/vim-indent-object.git
