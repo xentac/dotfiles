@@ -86,7 +86,7 @@ endfunction
 
 function! FixFatboyEnv()
     let filepath = '^' . expand('%:p:h')
-    if filepath =~ '/home/jchu/Dropbox/coding/oprius/fatboy/devel'
+    if filepath =~ '/home/jchu/Private/coding/oprius/fatboy/devel'
         set noet nosta textwidth=0
         set sw=3 ts=3 sts=3
     endif
