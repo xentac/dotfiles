@@ -5,7 +5,7 @@ call pathogen#infect()
 colorscheme elflord
 
 " Use zenburn in 256 color modes
-if &term =~ "xterm-256color" || &term =~ "screen"
+if &term =~ "xterm-256color" || &term =~ "screen" || &term =~ "screen-256color"
     set t_Co=256
     colorscheme zenburn
     set termencoding=utf-8
@@ -137,3 +137,5 @@ set hidden
 
 " Open taglist with F8
 map <F8> :TlistToggle<CR>
+
+set background=dark
