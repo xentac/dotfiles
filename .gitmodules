@@ -37,3 +37,6 @@
 [submodule "vim/bundle/bufexplorer"]
 	path = vim/bundle/bufexplorer
 	url = https://github.com/vim-scripts/bufexplorer.zip.git
+[submodule "vim/bundle/zenburn"]
+	path = vim/bundle/zenburn
+	url = git://github.com/jnurmine/Zenburn.git
