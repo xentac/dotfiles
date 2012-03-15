@@ -1,7 +1,8 @@
 set background=dark
 colorscheme solarized
 
-set guifont=Terminus\ 10
+"set guifont=Terminus\ 10
+set guifont=Inconsolata\ 10
 
 " Always show the tab line
 set showtabline=2
