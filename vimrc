@@ -11,6 +11,8 @@ if &term =~ "xterm-256color" || &term =~ "screen" || &term =~ "screen-256color"
     set termencoding=utf-8
 endif
 
+set colorcolumn=80
+
 let mapleader = ","
 
 " disable f1 and make it escape
