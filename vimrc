@@ -141,3 +141,10 @@ set hidden
 map <F8> :TlistToggle<CR>
 
 set background=dark
+
+map <leader>gs :Gstatus<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>gc :Gcommit<CR>
+map <leader>gb :Gblame<CR>
+map <leader>gl :Glog<CR>
+map <leader>gp :Gpush<CR>
