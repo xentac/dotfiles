@@ -91,6 +91,7 @@ function! FixFatboyEnv()
     if filepath =~ '/home/jchu/Private/coding/oprius/fatboy/devel'
         set noet nosta textwidth=0
         set sw=3 ts=3 sts=3
+        set wildignore+=*/build/*,*/dist/*,*/help-auxiliary/*,*/doc/*
     endif
 endfunction
 
@@ -148,3 +149,7 @@ map <leader>gc :Gcommit<CR>
 map <leader>gb :Gblame<CR>
 map <leader>gl :Glog<CR>
 map <leader>gp :Gpush<CR>
+
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+    \ 'file': '\.exe$\|\.so$\|\.dll$\|\.jpg$\|\.gif$\|\.png$' }
