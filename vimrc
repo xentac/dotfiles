@@ -86,6 +86,9 @@ function! DsCollapse()
     set hlsearch
 endfunction
 
+" coffee, cake, json, jade, and js files only have 2 spaces
+au BufEnter *.coffee,Cakefile,*.json,*.jade,*.js set ts=2 sw=2 sts=2
+
 function! FixFatboyEnv()
     let filepath = '^' . expand('%:p:h')
     if filepath =~ '/home/jchu/Private/coding/oprius/fatboy/devel'
@@ -101,9 +104,6 @@ au BufEnter *.css call FixFatboyEnv()
 
 " Set the filetype of *.kid to xhtml
 au BufRead *.kid set ft=xhtml
-
-" coffee, cake, json, jade, and js files only have 2 spaces
-au BufEnter *.coffee,Cakefile,*.json,*.jade,*.js set ts=2 sw=2 sts=2
 
 " Don't auto add comments on O, enter or auto wrap them
 set formatoptions-=cro
