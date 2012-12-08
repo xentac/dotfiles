@@ -109,7 +109,7 @@ au BufRead *.kid set ft=xhtml
 set formatoptions-=cro
 
 " <leader>s does spellcheck (leader is ,)
-"nmap <silent> <leader>s :set spell!<CR>
+nmap <silent> <leader>s :set spell!<CR>
 
 " Canadian spelling
 set spelllang=en_ca
@@ -121,7 +121,7 @@ nnoremap <F5> :GundoToggle<CR>
 map <leader>td <Plug>TaskList
 
 " Toggle nerdtree with ,n
-map <leader>, :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
 
 " Allow ctrl-j, ctrl-k, etc for window movement
 map <c-j> <c-w>j
@@ -153,9 +153,3 @@ map <leader>gp :Gpush<CR>
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.jpg$\|\.gif$\|\.png$' }
-
-" Settings for vim-pad
-let g:pad_dir='~/Dropbox/notes'
-" Make the note height 10 lines
-let g:pad_window_height=10
-let g:pad_default_file_extension=".txt"

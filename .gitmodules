@@ -49,6 +49,3 @@
 [submodule "vim/bundle/ack"]
 	path = vim/bundle/ack
 	url = git://github.com/mileszs/ack.vim.git
-[submodule "vim/bundle/vim-pad"]
-	path = vim/bundle/vim-pad
-	url = git://github.com/fmoralesc/vim-pad.git
