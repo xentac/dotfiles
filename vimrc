@@ -153,3 +153,19 @@ map <leader>gp :Gpush<CR>
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.jpg$\|\.gif$\|\.png$' }
+
+let g:notes_directory = '~/Dropbox/notes'
+let g:notes_suffix = '.txt'
+
+" Use ,t to prompt for note searches
+nmap <leader>t :SearchNotes 
+" Use ,h to start a note edit
+nmap <leader>h :Note 
+" Use ctrl-] to search for the text under the cursor
+nmap <C-]> :SearchNotes<CR>
+" In visual mode, create a note from the selected text
+vmap <Leader>h :NoteFromSelectedText<CR>
+" Use ,d to show recent notes
+nmap <leader>d :RecentNotes<CR>
+" Create a collect note just by pressing F7
+nnoremap <F7> :Note! collect<CR>
