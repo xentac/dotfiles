@@ -49,3 +49,9 @@
 [submodule "vim/bundle/ack"]
 	path = vim/bundle/ack
 	url = git://github.com/mileszs/ack.vim.git
+[submodule "vim/bundle/notes"]
+	path = vim/bundle/notes
+	url = git://github.com/xolox/vim-notes.git
+[submodule "vim/bundle/markdown-folding"]
+	path = vim/bundle/markdown-folding
+	url = git://github.com/nelstrom/vim-markdown-folding.git
