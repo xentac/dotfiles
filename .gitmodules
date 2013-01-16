@@ -58,3 +58,6 @@
 [submodule "vim/bundle/khuno"]
 	path = vim/bundle/khuno
 	url = https://github.com/alfredodeza/khuno.vim.git
+[submodule "vim/bundle/signature"]
+	path = vim/bundle/signature
+	url = git://github.com/kshenoy/vim-signature.git
