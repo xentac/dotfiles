@@ -169,3 +169,7 @@ vmap <Leader>h :NoteFromSelectedText<CR>
 nmap <leader>d :RecentNotes<CR>
 " Create a collect note just by pressing F7
 nnoremap <F7> :Note! collect<CR>
+
+" Configure khuno to use python2 flake8
+let g:khuno_flake_cmd = 'flake8-python2'
+let g:khuno_ignore="E128"

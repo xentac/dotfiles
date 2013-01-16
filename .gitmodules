@@ -55,3 +55,6 @@
 [submodule "vim/bundle/markdown-folding"]
 	path = vim/bundle/markdown-folding
 	url = git://github.com/nelstrom/vim-markdown-folding.git
+[submodule "vim/bundle/khuno"]
+	path = vim/bundle/khuno
+	url = https://github.com/alfredodeza/khuno.vim.git
