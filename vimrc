@@ -88,6 +88,8 @@ endfunction
 
 " coffee, cake, json, jade, and js files only have 2 spaces
 au BufEnter *.coffee,Cakefile,*.json,*.jade,*.js set ts=2 sw=2 sts=2
+" Make sure that opening python files sets spacing to 4
+au BufEnter *.py set ts=4 sw=4 sts=4
 
 function! FixFatboyEnv()
     let filepath = '^' . expand('%:p:h')
