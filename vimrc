@@ -176,3 +176,6 @@ nnoremap <F7> :Note! collect<CR>
 let g:khuno_flake_cmd = 'flake8-python2'
 let g:khuno_ignore="E128"
 nmap <leader>k :Khuno off<CR>
+
+nmap <leader>f :Ack<space>
+nmap <leader>g :Ack <C-R><C-W><CR>
