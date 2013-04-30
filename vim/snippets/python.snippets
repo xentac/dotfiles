@@ -6,3 +6,9 @@ snippet traceb
 	import traceback; traceback.print_stack()
 snippet traceex
 	import traceback; print traceback.format_exc()
+snippet profile
+	import cProfile; cProfile.runctx('${1:variable}', globals(), locals())
+snippet sleep
+	import time; time.sleep(${1:10})
+snippet q
+	import q; q(${1})
