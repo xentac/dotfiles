@@ -1,0 +1,4 @@
+remove Lock = Caps_Lock
+keysym XF86Favorites = Caps_Lock
+keysym Caps_Lock = grave asciitilde
+add Lock = Caps_Lock
