@@ -1,5 +1,4 @@
 set nocompatible
-colorscheme desert
 filetype off
 let g:deoplete#enable_at_startup = 1
 
@@ -13,12 +12,24 @@ function! PackInit() abort
   " Additional plugins here
   call minpac#add('Shougo/deoplete.nvim', {'do': 'silent! UpdateRemotePlugins'})
   call minpac#add('itchyny/lightline.vim')
+  call minpac#add('jnurmine/Zenburn')
 endfunction
 
 command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
 command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
 command! PackUpdateAndQuit call PackInit() | call minpac#update('', {'do': 'quit'})
+
+function! s:has_colorscheme(name) abort
+    let pat = 'colors/'.a:name.'.vim'
+    return !empty(globpath(&rtp, pat))
+endfunction
+
+if s:has_colorscheme('zenburn')
+  colorscheme zenburn
+else
+  colorscheme desert
+endif
 
 filetype plugin indent on
 
