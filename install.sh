@@ -11,3 +11,10 @@ ln -s $(pwd)/tmux.conf $HOME/.tmux.conf
 
 rm -rf $HOME/.tmux
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm && $HOME/.tmux/plugins/tpm/bin/install_plugins
+
+rm -rf $HOME/.config/nvim
+mkdir -p $HOME/.config/nvim
+ln -s $(pwd)/init.vim $HOME/.config/nvim/init.vim
+
+git clone https://github.com/k-takata/minpac.git $HOME/.config/nvim/pack/minpac/opt/minpac
+nvim --headless +PackUpdateAndQuit +q
