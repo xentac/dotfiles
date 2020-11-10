@@ -1,4 +1,5 @@
 #!/bin/sh
+rm $HOME/.Xmodmap
 ln -s $(pwd)/Xmodmap $HOME/.Xmodmap
 
 mkdir -p $HOME/.config/i3
