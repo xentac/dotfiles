@@ -262,6 +262,7 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -R
 assign [instance="^crx_nckgahadagoaajjgafhacjanaoiihapd$"] number 10
 
 exec --no-startup-id compton -b
+exec --no-startup-id nm-applet
 
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
 
