@@ -13,6 +13,8 @@ function! PackInit() abort
   call minpac#add('Shougo/deoplete.nvim', {'do': 'silent! UpdateRemotePlugins'})
   call minpac#add('itchyny/lightline.vim')
   call minpac#add('jnurmine/Zenburn')
+  call minpac#add('morhetz/gruvbox')
+  call minpac#add('tpope/vim-unimpaired')
 endfunction
 
 command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
@@ -25,8 +27,8 @@ function! s:has_colorscheme(name) abort
     return !empty(globpath(&rtp, pat))
 endfunction
 
-if s:has_colorscheme('zenburn')
-  colorscheme zenburn
+if s:has_colorscheme('gruvbox')
+  colorscheme gruvbox
 else
   colorscheme desert
 endif
@@ -34,12 +36,20 @@ endif
 filetype plugin indent on
 
 set shiftwidth=2 tabstop=2 softtabstop=2
-set expandtab
+set expandtab smarttab
 
 set nohlsearch
 set mouse=
+set nobackup
 
 set smartcase ignorecase
+
+set relativenumber
+
+set autoindent smartindent nocindent
+inoremap # #
+
+set hidden
 
 hi CursorLine   cterm=NONE ctermbg=22 ctermfg=white guibg=darkred guifg=white
 hi CursorColumn cterm=NONE ctermbg=22 ctermfg=white guibg=darkred guifg=white
@@ -48,6 +58,9 @@ set cursorline
 " Map F1 to Esc to stop accidental clicks
 nnoremap <F1> <Esc>
 inoremap <F1> <Esc>
+
+" Use , as leader
+let mapleader = ","
 
 " Add some capitalization changes because they're annoying
 command W :w
@@ -72,3 +85,6 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Enable live substitute in neovim
 set inccommand=split
+
+" Don't parse modelines, it's dangerous
+set nomodeline
