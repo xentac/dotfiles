@@ -21,5 +21,15 @@ rm -rf $HOME/.config/nvim
 mkdir -p $HOME/.config/nvim
 ln -s $(pwd)/init.vim $HOME/.config/nvim/init.vim
 
-git clone https://github.com/k-takata/minpac.git $HOME/.config/nvim/pack/minpac/opt/minpac
-nvim --headless +PackUpdateAndQuit +q
+if which nvim; then
+  git clone https://github.com/k-takata/minpac.git $HOME/.config/nvim/pack/minpac/opt/minpac
+  nvim --headless +PackUpdateAndQuit +q
+fi
+
+if which vim; then
+  # Set up vim and install plugins
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  rm -rf $HOME/.vimrc
+  ln -s $(pwd)/vimrc $HOME/.vimrc
+  vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
+fi
