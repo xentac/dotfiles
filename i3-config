@@ -264,11 +264,14 @@ assign [instance="^crx_nckgahadagoaajjgafhacjanaoiihapd$"] number 10
 exec --no-startup-id compton -b
 #exec --no-startup-id nm-applet
 exec --no-startup-id dex -ae i3
+exec --no-startup-id dispwin $HOME/.icc/display.cal
 
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
 
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 
 # Handle keyboard remapping
-bindsym $mod+Shift+Ctrl+1 exec --no-startup-id setxkbmap us dvorak && xmodmap ~/.Xmodmap
-bindsym $mod+Shift+Ctrl+2 exec --no-startup-id setxkbmap us && xmodmap ~/.Xmodmap
+# bindsym $mod+Shift+Ctrl+1 exec --no-startup-id setxkbmap us dvorak && xmodmap ~/.Xmodmap
+# bindsym $mod+Shift+Ctrl+2 exec --no-startup-id setxkbmap us && xmodmap ~/.Xmodmap
+exec --no-startup-id setxkbmap -model pc104 -layout us,us -variant dvorak, -option grp:alt_shift_toggle
+exec --no-startup-id xmodmap ~/.Xmodmap
