@@ -26,10 +26,10 @@ if which nvim; then
   nvim --headless +PackUpdateAndQuit +q
 fi
 
-if which vim; then
-  # Set up vim and install plugins
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  rm -rf $HOME/.vimrc
-  ln -s $(pwd)/vimrc $HOME/.vimrc
-  vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
-fi
+#if which vim; then
+#  # Set up vim and install plugins
+#  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#  rm -rf $HOME/.vimrc
+#  ln -s $(pwd)/vimrc $HOME/.vimrc
+#  vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
+#fi
