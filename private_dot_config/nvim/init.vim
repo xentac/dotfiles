@@ -10,11 +10,14 @@ function! PackInit() abort
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " Additional plugins here
+  call minpac#add('jmcantrell/vim-virtualenv')
   call minpac#add('Shougo/deoplete.nvim', {'do': 'silent! UpdateRemotePlugins'})
   call minpac#add('itchyny/lightline.vim')
   call minpac#add('jnurmine/Zenburn')
   call minpac#add('morhetz/gruvbox')
   call minpac#add('tpope/vim-unimpaired')
+  call minpac#add('nathangrigg/vim-beancount')
+
 endfunction
 
 command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
@@ -88,3 +91,10 @@ set inccommand=split
 
 " Don't parse modelines, it's dangerous
 set nomodeline
+
+" Things to make beancount easier
+noremap <Leader>1 :make<CR>
+noremap <Leader>2 :cp<CR>
+noremap <Leader>3 :cn<CR>
+noremap <Leader>4 :cw<CR>
+nnoremap <buffer> <LocalLeader>c :GetContext<CR>
