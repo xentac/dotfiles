@@ -26,6 +26,7 @@ font pango:FontAwesome 10, pango:Terminus 10
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -c 002233
 exec --no-startup-id $HOME/bin/screensaver.sh
+exec --no-startup-id xset -dpms
 
 ## Screenshots
 #bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
