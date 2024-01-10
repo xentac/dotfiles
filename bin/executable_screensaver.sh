@@ -5,6 +5,8 @@ export PRIMARY_DISPLAY="$(xrandr | awk '/ primary/{print $1}')"
 
 # Run xidlehook
 xidlehook \
+  `# Reset timers after sleep` \
+  --detect-sleep \
   `# Don't lock when there's a fullscreen application` \
   --not-when-fullscreen \
   `# Don't lock when there's audio playing` \
@@ -16,7 +18,6 @@ xidlehook \
   `# Undim & lock after 60 more seconds` \
   --timer 60 \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; i3lock -c 002233' \
-    '' \
     '' \
   `# Finally, suspend an hour after it locks` \
   --timer 3600 \
