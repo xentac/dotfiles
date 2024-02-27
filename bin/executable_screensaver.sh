@@ -17,7 +17,7 @@ xidlehook \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
   `# Undim & lock after 60 more seconds` \
   --timer 60 \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; i3lock -c 002233' \
+    'setxkbmap -model pc104 -layout us,us -variant dvorak, -option grp:alt_shift_toggle; xmodmap ~/.Xmodmap; xrandr --output "$PRIMARY_DISPLAY" --brightness 1; i3lock -c 002233' \
     '' \
   `# Finally, suspend an hour after it locks` \
   --timer 3600 \
