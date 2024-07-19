@@ -1,0 +1,6 @@
+["coding/i3blocks-contrib"]
+  type = "git-repo"
+  url = "https://github.com/vivien/i3blocks-contrib"
+  refreshPeriod = "168h"
+  ["coding/i3blocks-contrib".pull]
+    args = ["--ff-only"]
