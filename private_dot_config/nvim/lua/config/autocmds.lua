@@ -5,7 +5,7 @@ vim.filetype.add({
   pattern = {
     [".*"] = {
       function(path, buf)
-        if path ~= ".*\\.beancount" then
+        if vim.regex(".*\\.beancount$"):match_str(path) ~= nil then
           return "beancount"
         end
         return vim.bo[buf]
