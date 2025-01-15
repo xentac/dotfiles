@@ -8,10 +8,11 @@ vim.filetype.add({
         if vim.regex(".*\\.beancount$"):match_str(path) ~= nil then
           return "beancount"
         end
+        local bigfile_size = vim.g.bigfile_size or 1000000
         return vim.bo[buf]
             and vim.bo[buf].filetype ~= "bigfile"
             and path
-            and vim.fn.getfsize(path) > vim.g.bigfile_size
+            and vim.fn.getfsize(path) > bigfile_size
             and "bigfile"
           or nil
       end,
