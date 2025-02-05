@@ -19,6 +19,13 @@ return {
         "yaml",
         "beancount",
       },
+      function(_, _)
+        vim.filetype.add({
+          extension = {
+            beancount = { "beancount", { priority = 100 } },
+          },
+        })
+      end,
     },
   },
 }
