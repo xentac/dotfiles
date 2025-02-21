@@ -1,6 +1,6 @@
 # vim:fileencoding=utf-8:foldmethod=marker
 
-#: Fonts \{\{\{
+#: Fonts {{ print "{{{"}}
 
 #: kitty has very powerful font management. You can configure
 #: individual font faces and even specify special fonts for particular
@@ -251,9 +251,9 @@ font_size 11
 #: problem try setting text_fg_override_threshold to 0 to see if this
 #: is the cause of the problem.
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Cursor customization \{\{\{
+#: Cursor customization {{ print "{{{"}}
 
 # cursor #cccccc
 
@@ -306,9 +306,9 @@ font_size 11
 #: Stop blinking cursor after the specified number of seconds of
 #: keyboard inactivity. Set to zero to never stop blinking.
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Scrollback \{\{\{
+#: Scrollback {{ print "{{{"}}
 
 # scrollback_lines 2000
 
@@ -375,9 +375,9 @@ font_size 11
 #: platforms such as macOS and Wayland. Use negative numbers to change
 #: scroll direction.
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Mouse \{\{\{
+#: Mouse {{ print "{{{"}}
 
 # mouse_hide_wait 3.0
 
@@ -531,7 +531,7 @@ font_size 11
 
 #: The default shape of the mouse pointer when dragging across text.
 
-#: Mouse actions \{\{\{
+#: Mouse actions {{ print "{{{"}}
 
 #: Mouse buttons can be mapped to perform arbitrary actions. The
 #: syntax is:
@@ -687,11 +687,11 @@ font_size 11
 #::  Requires shell integration
 #::  <https://sw.kovidgoyal.net/kitty/shell-integration/> to work.
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Performance tuning \{\{\{
+#: Performance tuning {{ print "{{{"}}
 
 # repaint_delay 10
 
@@ -720,9 +720,9 @@ font_size 11
 #: monitor. With a very high speed mouse/high keyboard repeat rate,
 #: you may notice some slight input latency. If so, set this to no.
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Terminal bell \{\{\{
+#: Terminal bell {{ print "{{{"}}
 
 enable_audio_bell no
 
@@ -777,9 +777,9 @@ bell_on_tab "🔔 "
 #: be removed if Linux ever provides desktop-agnostic support for
 #: setting system sound themes.
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Window layout \{\{\{
+#: Window layout {{ print "{{{"}}
 
 # remember_window_size  yes
 # initial_window_width  640
@@ -959,9 +959,9 @@ bell_on_tab "🔔 "
 #: want confirmation when closing individual windows, you can map the
 #: close_window_with_confirmation action.
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Tab bar \{\{\{
+#: Tab bar {{ print "{{{"}}
 
 # tab_bar_edge bottom
 
@@ -1122,9 +1122,9 @@ bell_on_tab "🔔 "
 #: margins the default color is chosen to match the background color
 #: of the neighboring tab.
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Color scheme \{\{\{
+#: Color scheme {{ print "{{{"}}
 
 # foreground #dddddd
 # background #000000
@@ -1221,7 +1221,7 @@ bell_on_tab "🔔 "
 #: to be used unchanged. Note that these colors can be overridden by
 #: the program running in the terminal.
 
-#: The color table \{\{\{
+#: The color table {{ print "{{{"}}
 
 #: The 256 terminal colors. There are 8 basic colors, each color has a
 #: dull and bright version, for the first 16 colors. You can set the
@@ -1291,11 +1291,11 @@ bell_on_tab "🔔 "
 
 #: Color for marks of type 3 (violet)
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Advanced \{\{\{
+#: Advanced {{ print "{{{"}}
 
 # shell .
 
@@ -1637,9 +1637,9 @@ bell_on_tab "🔔 "
 #: an "Actions" menu in the macOS global menubar. Sub-menus can be
 #: created by adding more levels separated by the :: characters.
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: OS specific tweaks \{\{\{
+#: OS specific tweaks {{ print "{{{"}}
 
 # wayland_titlebar_color system
 
@@ -1752,9 +1752,9 @@ bell_on_tab "🔔 "
 #: to x11 or wayland to force the choice. Changing this option by
 #: reloading the config is not supported.
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Keyboard shortcuts \{\{\{
+#: Keyboard shortcuts {{ print "{{{"}}
 
 #: Keys are identified simply by their lowercase Unicode characters.
 #: For example: a for the A key, [ for the left square bracket key,
@@ -1820,7 +1820,7 @@ bell_on_tab "🔔 "
 #: cause all invocations of the hints kitten to have the --hints-
 #: offset=0 option applied.
 
-#: Clipboard \{\{\{
+#: Clipboard {{ print "{{{"}}
 
 #: Copy to clipboard
 
@@ -1860,9 +1860,9 @@ bell_on_tab "🔔 "
 
 #::      map kitty_mod+y new_window less @selection
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Scrolling \{\{\{
+#: Scrolling {{ print "{{{"}}
 
 #: Scroll line up
 
@@ -1952,9 +1952,9 @@ bell_on_tab "🔔 "
 #::  Requires shell integration
 #::  <https://sw.kovidgoyal.net/kitty/shell-integration/> to work.
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Window management \{\{\{
+#: Window management {{ print "{{{"}}
 
 #: New window
 
@@ -2091,9 +2091,9 @@ bell_on_tab "🔔 "
 
 #::  Works like focus_visible_window above, but swaps the window.
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Tab management \{\{\{
+#: Tab management {{ print "{{{"}}
 
 #: Next tab
 
@@ -2148,9 +2148,9 @@ map cmd+t       new_tab_with_cwd
 #: rather than at the end of the tabs list, use::
 
 #:     map ctrl+t new_tab !neighbor [optional cmd to run]
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Layout management \{\{\{
+#: Layout management {{ print "{{{"}}
 
 #: Next layout
 
@@ -2172,9 +2172,9 @@ map cmd+t       new_tab_with_cwd
 #: stack layout::
 
 #:     map ctrl+alt+z toggle_layout stack
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Font sizes \{\{\{
+#: Font sizes {{ print "{{{"}}
 
 #: You can change the font size for all top-level kitty OS windows at
 #: a time or only the current one.
@@ -2209,9 +2209,9 @@ map cmd+t       new_tab_with_cwd
 #: size::
 
 #:     map kitty_mod+f6 change_font_size current 10.0
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Select and act on visible text \{\{\{
+#: Select and act on visible text {{ print "{{{"}}
 
 #: Use the hints kitten to select text and either pass it to an
 #: external program or insert it into the terminal or copy it to the
@@ -2277,9 +2277,9 @@ map cmd+t       new_tab_with_cwd
 #: The hints kitten has many more modes of operation that you can map
 #: to different shortcuts. For a full description see hints kitten
 #: <https://sw.kovidgoyal.net/kitty/kittens/hints/>.
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: Miscellaneous \{\{\{
+#: Miscellaneous {{ print "{{{"}}
 
 #: Show documentation
 
@@ -2468,6 +2468,6 @@ map cmd+t       new_tab_with_cwd
 
 # map cmd+q quit
 
-#: \}\}\}
+#: {{ print "}}}"}}
 
-#: \}\}\}
+#: {{ print "}}}"}}
