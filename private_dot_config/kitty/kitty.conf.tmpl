@@ -734,7 +734,7 @@ visual_bell_duration 0.03
 #: The visual bell duration (in seconds). Flash the screen when a bell
 #: occurs for the specified number of seconds. Set to zero to disable.
 
-visual_bell_color darkgray
+# visual_bell_color darkgray
 
 #: The color used by visual bell. Set to none will fall back to
 #: selection background color. If you feel that the visual bell is too
@@ -1958,8 +1958,8 @@ bell_on_tab "🔔 "
 
 #: New window
 
-# map kitty_mod+enter new_window
-# map cmd+enter       new_window
+map kitty_mod+enter new_window_with_cwd
+map cmd+enter       new_window_with_cwd
 
 #::  You can open a new kitty window running an arbitrary program, for
 #::  example::
@@ -2471,3 +2471,8 @@ map cmd+t       new_tab_with_cwd
 #: {{ print "}}}"}}
 
 #: {{ print "}}}"}}
+
+# BEGIN_KITTY_THEME
+# Catppuccin-Mocha
+include current-theme.conf
+# END_KITTY_THEME
