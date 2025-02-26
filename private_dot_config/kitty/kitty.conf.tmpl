@@ -1364,7 +1364,12 @@ editor nvim
 #: See rc_custom_auth <https://sw.kovidgoyal.net/kitty/remote-
 #: control/#rc-custom-auth> for details.
 
-# allow_remote_control no
+allow_remote_control yes
+{{ if eq .chezmoi.os "darwin"}}
+listen_on unix:/tmp/mykitty
+{{ else if eq .chezmoi.os "linux"}}
+listen_on unix:@mykitty
+{{ end }}
 
 #: Allow other programs to control kitty. If you turn this on, other
 #: programs can control all aspects of kitty, including sending text
@@ -2471,6 +2476,28 @@ map cmd+t       new_tab_with_cwd
 #: {{ print "}}}"}}
 
 #: {{ print "}}}"}}
+
+map ctrl+j neighboring_window down
+map ctrl+k neighboring_window up
+map ctrl+h neighboring_window left
+map ctrl+l neighboring_window right
+
+# Unset the mapping to pass the keys to neovim
+map --when-focus-on var:IS_NVIM ctrl+j
+map --when-focus-on var:IS_NVIM ctrl+k
+map --when-focus-on var:IS_NVIM ctrl+h
+map --when-focus-on var:IS_NVIM ctrl+l
+
+# the 3 here is the resize amount, adjust as needed
+map alt+j kitten relative_resize.py down  3
+map alt+k kitten relative_resize.py up    3
+map alt+h kitten relative_resize.py left  3
+map alt+l kitten relative_resize.py right 3
+
+map --when-focus-on var:IS_NVIM alt+j
+map --when-focus-on var:IS_NVIM alt+k
+map --when-focus-on var:IS_NVIM alt+h
+map --when-focus-on var:IS_NVIM alt+l
 
 # BEGIN_KITTY_THEME
 # Default
