@@ -54,9 +54,9 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
-bindsym Menu exec kitty
-bindsym Print exec kitty
+bindsym $mod+Return exec /home/xentac/.local/kitty.app/bin/kitty
+bindsym Menu exec /home/xentac/.local/kitty.app/bin/kitty
+bindsym Print exec /home/xentac/.local/kitty.app/bin/kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill
