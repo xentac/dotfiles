@@ -294,3 +294,5 @@ exec --no-startup-id setxkbmap -model pc104 -layout us,us -variant dvorak, -opti
 
 exec --no-startup-id xinput set-prop 10 343 0.6
 exec --no-startup-id xinput set-prop 10 346 0 1 0
+
+exec --no-startup-id flatpak run com.tomjwatson.Emote
