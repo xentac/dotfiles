@@ -278,6 +278,8 @@ for_window [instance="^crx_knipolnnllmklapflnccelgolnpehhpl$"] floating disable,
 # Focus urgent workspace
 bindsym $mod+x [urgent=latest] focus
 
+bindsym $mod+semicolon [class="obsidian"] focus
+
 assign [instance="^crx_nckgahadagoaajjgafhacjanaoiihapd$"] number 10
 
 exec --no-startup-id dex -ae i3
