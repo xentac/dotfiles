@@ -1438,6 +1438,9 @@ listen_on unix:@mykitty
 #: config will only affect windows created after the reload.
 
 # exe_search_path
+{{- if eq .chezmoi.os "darwin"}}
+exe_search_path /opt/howebrew/bin
+{{ end }}
 
 #: Control where kitty finds the programs to run. The default search
 #: order is: First search the system wide PATH, then ~/.local/bin and
