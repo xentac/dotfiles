@@ -9,10 +9,11 @@ return {
       },
     },
   },
+  { "scottmckendry/cyberdream.nvim" },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "cyberdream",
     },
   },
 }
