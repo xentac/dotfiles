@@ -342,9 +342,12 @@ exec --no-startup-id flatpak run com.tomjwatson.Emote
 exec --no-startup-id mako
 exec --no-startup-id kanshi
 
-input "type:keyboard" {
+input "1:1:AT_Translated_Set_2_keyboard" {
   xkb_layout "custom"
-  xkb_variant "dvorak-custom"
+}
+
+input "6058:20564:ThinkPad_Extra_Buttons" {
+  xkb_layout "custom"
 }
 
 input type:touchpad {

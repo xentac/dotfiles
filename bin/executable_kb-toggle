@@ -1,0 +1,12 @@
+#!/bin/sh
+# Toggle built-in keyboard between Dvorak and QWERTY (for guest use)
+KB="1:1:AT_Translated_Set_2_keyboard"
+layout=$(swaymsg -t get_inputs | jq -r --arg id "$KB" '.[] | select(.identifier == $id) | .xkb_active_layout_name')
+
+if echo "$layout" | grep -qi dvorak; then
+    swaymsg input "$KB" xkb_layout us
+else
+    swaymsg input "$KB" xkb_layout custom
+fi
+
+pkill -RTMIN+11 waybar

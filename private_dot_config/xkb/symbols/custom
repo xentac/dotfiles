@@ -1,4 +1,4 @@
-xkb_symbols "dvorak-custom" {
+default xkb_symbols "dvorak-custom" {
     include "us(dvorak)"
     key <CAPS> { [ grave, asciitilde ] };
 };
