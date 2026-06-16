@@ -59,7 +59,7 @@
 
   "memory": {
     "interval": 30,
-    "format": "MEM {used:0.1f}G SWAP {swapUsed:0.1f}G",
+    "format": "MEM {used:0.1f}G({percentage}%) SWAP {swapUsed:0.1f}G({swapPercentage}%)",
   },
 
   "disk": {
@@ -73,7 +73,7 @@
     "format-wifi": "  IN {bandwidthDownBytes:>4} OUT {bandwidthDownBytes:>4}",
     "format-ethernet": "󰈀 IN {bandwidthDownBytes:>4} OUT {bandwidthDownBytes:>4}",
     "format-disconnected": "Disconnected",
-    "tooltip-format": "{ifname} {ipaddr} {gwaddr}",
+    "tooltip-format": "{ifname} {ipaddr}/{cidr} {gwaddr}",
   },
 
   "cpu": {
