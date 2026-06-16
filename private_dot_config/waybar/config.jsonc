@@ -70,9 +70,10 @@
 
   "network": {
     "interval": 5,
-    "format-wifi": "  {ipaddr} IN {bandwidthDownBytes:>4} OUT {bandwidthDownBytes:>4}",
-    "format-ethernet": "󰈀 {ipaddr} IN {bandwidthDownBytes:>4} OUT {bandwidthDownBytes:>4}",
+    "format-wifi": "  IN {bandwidthDownBytes:>4} OUT {bandwidthDownBytes:>4}",
+    "format-ethernet": "󰈀 IN {bandwidthDownBytes:>4} OUT {bandwidthDownBytes:>4}",
     "format-disconnected": "Disconnected",
+    "tooltip-format": "{ifname} {ipaddr} {gwaddr}",
   },
 
   "cpu": {
