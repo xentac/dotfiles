@@ -1,0 +1,83 @@
+* {
+  border: none;
+  font-family: "monospace", "Symbols Nerd Font Mono";
+  font-size: 13px;
+}
+
+window#waybar {
+  background: #2d2d2d;
+  color: #ffffff;
+}
+
+/* 1. Remove the gap between workspace buttons */
+#workspaces button {
+  padding: 0 3px; /* Tighten internal spacing */
+  margin: 0 0px; /* Tighten external spacing */
+  color: #ffffff;
+  background: transparent;
+  border-bottom: 3px solid transparent; /* Prepare for highlight */
+}
+
+/* 2. Highlight the active/focused workspace */
+#workspaces button.focused {
+  background: #4c7899; /* Classic i3/Sway blue highlight */
+  border-bottom: 3px solid #00ff00; /* Green bar to match your theme[cite: 1] */
+}
+
+/* 3. Highlight workspaces with open windows (optional) */
+#workspaces button.visible {
+  color: #00ff00; /* Your favorite green[cite: 1] */
+}
+
+/* Highlight the workspace button when a window has an urgency hint */
+#workspaces button.urgent {
+  background-color: #eb4d4b; /* A bright red */
+  color: #ffffff;
+  border-bottom: 3px solid #ff0000;
+}
+
+/* 4. Remove padding from the entire module to shift it left */
+#workspaces {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+#scratchpad {
+  background: #2d2d2d;
+  color: #ffffff;
+  padding: 0 6px;
+}
+
+/* Pack text tightly */
+#pulseaudio,
+#memory,
+#disk,
+#network,
+#cpu,
+#temperature,
+#battery,
+#custom-utctime,
+#custom-dubtime,
+#clock {
+  padding: 0 4px;
+}
+
+/* Style your specific green modules[cite: 1, 4] */
+#custom-utctime,
+#custom-dubtime,
+#clock,
+#network {
+  color: #00ff00;
+}
+
+/* Style the pipe separator specifically */
+#custom-sep {
+  color: #555555;
+  padding: 0 2px;
+  font-weight: bold;
+}
+
+#tray {
+  margin-left: 10px;
+  padding-right: 5px;
+}
