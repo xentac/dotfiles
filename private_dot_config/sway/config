@@ -365,9 +365,9 @@ input type:touchpad {
 }
 
 exec swayidle -w \
-          timeout 530 'brightnessctl --save set 10%' resume 'brightnessctl --restore' \
-          timeout 600 'loginctl lock-session' \
-          timeout 1200 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          timeout 1130 'brightnessctl --save set 10%' resume 'brightnessctl --restore' \
+          timeout 1200 'loginctl lock-session' \
+          timeout 2400 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           before-sleep 'loginctl lock-session' \
           lock 'swaylock -f -c 000000'
 
