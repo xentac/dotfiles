@@ -342,7 +342,7 @@ exec --no-startup-id dispwin $HOME/.icc/display.cal
 # bindsym $mod+Shift+Ctrl+1 exec --no-startup-id setxkbmap us dvorak && xmodmap ~/.Xmodmap
 # bindsym $mod+Shift+Ctrl+2 exec --no-startup-id setxkbmap us && xmodmap ~/.Xmodmap
 
-exec --no-startup-id flatpak run com.tomjwatson.Emote
+bindsym $mod+u /home/xentac/.local/bin/rofimoji --action copy
 
 exec --no-startup-id mako
 exec --no-startup-id kanshi
