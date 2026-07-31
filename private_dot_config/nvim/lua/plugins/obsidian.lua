@@ -23,6 +23,10 @@ return {
         name = "personal",
         path = "~/Documents/Obsidian Vault/",
       },
+      {
+        name = "neurospicy",
+        path = "~/Documents/neurospicy/",
+      },
     },
     -- This function determines the filename of new notes
     note_id_func = function(title)
