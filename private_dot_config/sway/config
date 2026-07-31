@@ -145,6 +145,10 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
+# toggle sticky mode (pin floating window to screen)
+bindsym $mod+p sticky toggle
+bindsym $mod+Shift+p floating enable, sticky toggle
+
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
@@ -367,10 +371,22 @@ input type:touchpad {
 exec swayidle -w \
           timeout 1130 'brightnessctl --save set 10%' resume 'brightnessctl --restore' \
           timeout 1200 'loginctl lock-session' \
-          timeout 2400 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          timeout 3200 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           before-sleep 'loginctl lock-session' \
           lock 'swaylock -f -c 000000'
 
 # Matches "Meet - ..." ONLY if it does NOT end with " - Google Chrome"
 for_window [app_id="google-chrome" title="^Meet - (?!.* - Google Chrome$)"] floating enable, sticky enable
 
+# High-contrast window borders & colors with titlebars
+default_floating_border normal 3
+default_border normal 2
+
+# Colors (Tokyo Night theme): class border background text indicator child_border
+client.focused          #7aa2f7 #1f2335 #c0caf5 #7dcfff   #7aa2f7
+client.focused_inactive #414868 #1a1b26 #565f89 #414868   #414868
+client.unfocused        #24283b #1a1b26 #565f89 #24283b   #24283b
+client.urgent           #f7768e #db4b4b #ffffff #f7768e   #f7768e
+
+# Floating Chrome windows border configuration (normal border with titlebar)
+for_window [app_id="google-chrome" floating] border normal 3
