@@ -6,8 +6,11 @@ email = "jchu@xentac.net"
 
 [ui]
 editor = "nvim"
-default-command = "log"
+default-command = "stlog"
 
 [colors]
 "diff removed token" = { fg = "bright red", bg = "#400000", underline = false }
 "diff added token" = { fg = "bright green", bg = "#003000", underline = false }
+
+[aliases]
+stlog = ["util", "exec", "--", "sh", "-c", "jj status && jj log"]
