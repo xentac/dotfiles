@@ -1,0 +1,13 @@
+[custom.jj]
+when = "jj-starship detect"
+shell = ["jj-starship"]
+format = "$output "
+
+[git_branch]
+disabled = true
+
+[vcs]
+disabled = true
+
+[git_status]
+disabled = true
