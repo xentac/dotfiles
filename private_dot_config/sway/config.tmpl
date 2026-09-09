@@ -19,6 +19,14 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
         dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
 set $mod Mod4
+{{- if eq .chezmoi.hostname "donatello" }}
+
+# Cursor theme + size (logical px; sway scales 2x for the HiDPI panel).
+# Matches XCURSOR_THEME/XCURSOR_SIZE set in the NixOS config.
+seat * xcursor_theme Adwaita 24
+# XWayland apps read X resources and work in PHYSICAL pixels: 24 * 2 = 48.
+exec_always xrdb -merge <<< "Xcursor.size: 48"
+{{- end }}
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -35,7 +43,9 @@ font pango:FontAwesome 10, pango:Terminus 10
 # screen before suspend. Use loginctl lock-session to lock your screen.
 #exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/$USER/bin/locker.sh
 #exec --no-startup-id $HOME/bin/screensaver.sh
+{{- if eq .chezmoi.hostname "baxter" }}
 exec --no-startup-id xset -dpms s 0
+{{- end }}
 
 ## Screenshots
 #bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
@@ -81,9 +91,15 @@ bindsym XF86Search exec bemenu-run
 floating_modifier $mod
 
 # start a terminal
+{{- if eq .chezmoi.hostname "baxter" }}
 bindsym $mod+Return exec /home/xentac/.local/kitty.app/bin/kitty
 bindsym Menu exec /home/xentac/.local/kitty.app/bin/kitty
 bindsym Print exec /home/xentac/.local/kitty.app/bin/kitty
+{{- else }}
+bindsym $mod+Return exec kitty
+bindsym Menu exec kitty
+bindsym Print exec kitty
+{{- end }}
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -267,7 +283,9 @@ set $screensaver loginctl lock-session
 bindsym Control+Mod1+Delete exec "$screensaver"
 #bindsym $mod+l exec "$screensaver"
 
+{{ if eq .chezmoi.hostname "baxter" -}}
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+{{- end }}
 
 # save last workspace - can toggle with mod+tab or mod+num_cur_ws
 workspace_auto_back_and_forth yes
@@ -285,7 +303,11 @@ show_marks yes
 set $mode_system System (l) lock, (e) logout, (r) reboot, (s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id "$screensaver", mode "default"
+{{- if eq .chezmoi.hostname "baxter" }}
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
+{{- else }}
+    bindsym e exec --no-startup-id swaymsg exit, mode "default"
+{{- end }}
     bindsym r exec --no-startup-id "reboot", mode "default"
     bindsym s exec --no-startup-id "poweroff", mode "default"
     # back to normal: Enter or Escape
@@ -339,14 +361,20 @@ bindsym $mod+semicolon [class="obsidian"] focus
 
 assign [instance="^crx_nckgahadagoaajjgafhacjanaoiihapd$"] number 10
 
+{{ if eq .chezmoi.hostname "baxter" -}}
 exec --no-startup-id dex -ae i3
 exec --no-startup-id dispwin $HOME/.icc/display.cal
+{{- end }}
 
 # Handle keyboard remapping
 # bindsym $mod+Shift+Ctrl+1 exec --no-startup-id setxkbmap us dvorak && xmodmap ~/.Xmodmap
 # bindsym $mod+Shift+Ctrl+2 exec --no-startup-id setxkbmap us && xmodmap ~/.Xmodmap
 
+{{ if eq .chezmoi.hostname "baxter" -}}
 bindsym $mod+u /home/xentac/.local/bin/rofimoji --action copy
+{{- else -}}
+bindsym $mod+u rofimoji --action copy
+{{- end }}
 
 exec --no-startup-id mako
 exec --no-startup-id kanshi
@@ -354,10 +382,12 @@ exec --no-startup-id kanshi
 input "1:1:AT_Translated_Set_2_keyboard" {
   xkb_layout "custom"
 }
+{{- if eq .chezmoi.hostname "baxter" }}
 
 input "6058:20564:ThinkPad_Extra_Buttons" {
   xkb_layout "custom"
 }
+{{- end }}
 
 input type:touchpad {
   natural_scroll enabled

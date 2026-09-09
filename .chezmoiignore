@@ -1,1 +1,8 @@
 README
+{{ if ne .chezmoi.hostname "baxter" -}}
+# X11/i3-only leftovers from the Ubuntu ThinkPad; skip on NixOS
+.Xmodmap
+.i3blocks.conf
+.config/i3
+coding/i3blocks-contrib
+{{ end -}}
