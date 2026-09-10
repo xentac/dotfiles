@@ -5,7 +5,7 @@
   "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
   "modules-center": [],
   "modules-right": [
-    "pulseaudio",
+    "wireplumber",
     "custom/sep",
     "memory",
     "custom/sep",
@@ -52,8 +52,9 @@
     "tooltip": false,
   },
 
-  "pulseaudio": {
+  "wireplumber": {
     "format": "VOL {volume}%",
+    "format-muted": "VOL MUTED",
     "on-click": "pavucontrol",
   },
 
