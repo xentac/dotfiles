@@ -392,7 +392,7 @@ input "6058:20564:ThinkPad_Extra_Buttons" {
 input type:touchpad {
 {{- if eq .chezmoi.hostname "donatello" }}
   accel_profile flat
-  pointer_accel 0.8
+  pointer_accel 0.6
 {{- end }}
   natural_scroll enabled
   click_method clickfinger
