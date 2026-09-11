@@ -393,12 +393,14 @@ input type:touchpad {
 {{- if eq .chezmoi.hostname "donatello" }}
   accel_profile flat
   pointer_accel 0.6
+  tap disabled
+{{- else }}
+  tap enabled
 {{- end }}
   natural_scroll enabled
   click_method clickfinger
   clickfinger_button_map lrm
   scroll_method two_finger
-  tap enabled
   tap_button_map lrm
 }
 
