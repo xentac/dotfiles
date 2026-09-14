@@ -1,4 +1,14 @@
 export EDITOR=nvim
 
+# Word navigation (zsh ignores ~/.inputrc, so bind these here).
+# Find a key's sequence with ctrl-v then the key.
+bindkey '^[[1;3C' forward-word   # alt-right
+bindkey '^[[1;3D' backward-word  # alt-left
+bindkey '^[^[[C' forward-word    # alt-right (esc + arrow variant)
+bindkey '^[^[[D' backward-word   # alt-left (esc + arrow variant)
+bindkey '^[[1;5C' forward-word   # ctrl-right
+bindkey '^[[1;5D' backward-word  # ctrl-left
+bindkey '^[k' backward-kill-word # alt-k (chromebook alt-backspace stand-in)
+
 alias vim=nvim
 alias vimdiff="nvim -d"
