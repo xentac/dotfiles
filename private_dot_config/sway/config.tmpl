@@ -371,13 +371,18 @@ exec --no-startup-id dispwin $HOME/.icc/display.cal
 # bindsym $mod+Shift+Ctrl+2 exec --no-startup-id setxkbmap us && xmodmap ~/.Xmodmap
 
 {{ if eq .chezmoi.hostname "baxter" -}}
-bindsym $mod+u /home/xentac/.local/bin/rofimoji --action copy
+bindsym $mod+u exec /home/xentac/.local/bin/rofimoji --action copy
+bindsym $mod+period exec /home/xentac/.local/bin/rofimoji --action type
 {{- else -}}
-bindsym $mod+u rofimoji --action copy
+bindsym $mod+u exec rofimoji --action copy
+bindsym $mod+period exec rofimoji --action type
 {{- end }}
 
 exec --no-startup-id mako
 exec --no-startup-id kanshi
+# Re-apply kanshi profiles on every sway config reload (no-op at startup,
+# kanshi applies its config fresh when it launches).
+exec_always kanshictl reload
 
 input "1:1:AT_Translated_Set_2_keyboard" {
   xkb_layout "custom"
