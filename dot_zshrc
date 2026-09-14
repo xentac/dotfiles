@@ -1,5 +1,8 @@
 export EDITOR=nvim
 
+# Emacs-style line editing (EDITOR=nvim otherwise makes zsh default to vi mode).
+bindkey -e
+
 # Word navigation (zsh ignores ~/.inputrc, so bind these here).
 # Find a key's sequence with ctrl-v then the key.
 bindkey '^[[1;3C' forward-word   # alt-right
@@ -9,6 +12,11 @@ bindkey '^[^[[D' backward-word   # alt-left (esc + arrow variant)
 bindkey '^[[1;5C' forward-word   # ctrl-right
 bindkey '^[[1;5D' backward-word  # ctrl-left
 bindkey '^[k' backward-kill-word # alt-k (chromebook alt-backspace stand-in)
+
+# Edit the current command line in $EDITOR (bound by default in bash, not zsh).
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
 
 alias vim=nvim
 alias vimdiff="nvim -d"
