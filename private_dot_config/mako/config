@@ -1,0 +1,6 @@
+# Critical notifications (e.g. poweralertd's low-battery warnings) should be
+# impossible to miss: red border, never expire, render above fullscreen.
+[urgency=critical]
+border-color=#bf616a
+default-timeout=0
+layer=overlay
