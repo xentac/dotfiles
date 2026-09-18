@@ -99,6 +99,11 @@ bindsym Print exec /home/xentac/.local/kitty.app/bin/kitty
 bindsym $mod+Return exec kitty
 bindsym Menu exec kitty
 bindsym Print exec kitty
+
+# Quake-style drop-down terminal (Wayland layer-shell, so sway-only, not
+# baxter/i3). Running the kitten again toggles visibility; config lives in
+# ~/.config/kitty/quick-access-terminal.conf
+bindsym $mod+grave exec kitten quick-access-terminal --detach
 {{- end }}
 
 # kill focused window
@@ -357,7 +362,9 @@ for_window [instance="^crx_knipolnnllmklapflnccelgolnpehhpl$"] floating disable,
 # Focus urgent workspace
 bindsym $mod+x [urgent=latest] focus
 
-bindsym $mod+semicolon [class="obsidian"] focus
+# Quick-note Obsidian popup (spawn/toggle a scratchpad window on the daily
+# note, separate from the main Obsidian window)
+bindsym $mod+semicolon exec /home/xentac/.local/bin/obsidian-quick-note
 
 assign [instance="^crx_nckgahadagoaajjgafhacjanaoiihapd$"] number 10
 

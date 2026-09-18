@@ -1,0 +1,45 @@
+#!/bin/sh
+# Toggle a quick-note Obsidian popup, separate from the main window.
+#
+# First press spawns a new window on today's daily note (via the Advanced URI
+# community plugin), marks it, and parks it in the scratchpad; later presses
+# toggle it. The window keeps its state between summons.
+
+MARK=obsidian_quicknote
+VAULT_URI="obsidian://advanced-uri?vault=Obsidian%20Vault&daily=true&openmode=window"
+APP_FILTER='[.. | select(.app_id? == "md.obsidian.Obsidian") | .id]'
+
+# Popup already exists: just toggle it.
+if swaymsg "[con_mark=\"$MARK\"] scratchpad show" >/dev/null 2>&1; then
+    exit 0
+fi
+
+# Cold start: launch Obsidian's main window only, so we don't mistake it for
+# the popup below. Press the key again once it's up.
+if ! swaymsg -t get_tree | jq -e "$APP_FILTER | length > 0" >/dev/null; then
+    obsidian >/dev/null 2>&1 &
+    exit 0
+fi
+
+before=$(swaymsg -t get_tree | jq -c "$APP_FILTER")
+
+obsidian "$VAULT_URI" >/dev/null 2>&1 &
+
+# Claim the first new Obsidian window as the popup (poll up to ~10s).
+i=0
+while [ "$i" -lt 100 ]; do
+    con_id=$(swaymsg -t get_tree \
+        | jq -r --argjson before "$before" "$APP_FILTER - \$before | first // empty")
+    if [ -n "$con_id" ]; then
+        swaymsg "[con_id=$con_id] mark $MARK, floating enable, resize set 60 ppt 80 ppt, move position center, move scratchpad, scratchpad show"
+        # Obsidian also requests activation on the main window when handling
+        # the URI, which sway records as an urgency hint ($mod+x bait). Clear
+        # it now and again shortly after, in case it lands late.
+        swaymsg '[app_id="md.obsidian.Obsidian"] urgent disable' >/dev/null 2>&1
+        sleep 1
+        swaymsg '[app_id="md.obsidian.Obsidian"] urgent disable' >/dev/null 2>&1
+        exit 0
+    fi
+    sleep 0.1
+    i=$((i + 1))
+done
