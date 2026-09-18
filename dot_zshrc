@@ -18,5 +18,8 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
-alias vim=nvim
-alias vimdiff="nvim -d"
+#alias vim=nvim
+#alias vimdiff="nvim -d"
+
+# All of my remote terminals support truecolor
+[[ -z $COLORTERM ]] && export COLORTERM=truecolor
