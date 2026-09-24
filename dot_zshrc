@@ -13,6 +13,15 @@ bindkey '^[[1;5C' forward-word   # ctrl-right
 bindkey '^[[1;5D' backward-word  # ctrl-left
 bindkey '^[k' backward-kill-word # alt-k (chromebook alt-backspace stand-in)
 
+# Home/End/Delete (variants for different terminals)
+bindkey '^[[H' beginning-of-line  # home
+bindkey '^[[1~' beginning-of-line # home (vt variant)
+bindkey '^[OH' beginning-of-line  # home (application mode)
+bindkey '^[[F' end-of-line        # end
+bindkey '^[[4~' end-of-line       # end (vt variant)
+bindkey '^[OF' end-of-line        # end (application mode)
+bindkey '^[[3~' delete-char       # delete
+
 # Edit the current command line in $EDITOR (bound by default in bash, not zsh).
 autoload -Uz edit-command-line
 zle -N edit-command-line
