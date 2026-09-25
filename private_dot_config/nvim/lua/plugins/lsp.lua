@@ -33,6 +33,8 @@ if on_nixos then
   servers.lua_ls = { mason = false }
   -- Nix language server, for editing the nixos-config repo
   servers.nil_ls = { mason = false }
+  -- Markdown; Mason's .NET build aborts on NixOS (missing libicu)
+  servers.marksman = { mason = false }
 end
 
 return {
