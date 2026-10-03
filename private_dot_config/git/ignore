@@ -1,0 +1,6 @@
+# Global git excludes (git reads this when core.excludesFile is unset).
+# Only tooling litter that appears in EVERY repo belongs here; per-project
+# build output goes in that project's .gitignore.
+
+# Claude Code's `isolation: worktree` agents check out worktrees here.
+.claude/worktrees/
