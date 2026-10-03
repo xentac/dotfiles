@@ -67,6 +67,10 @@ bindsym $mod+Shift+S exec --no-startup-id grim -g "$(slurp)" - | wl-copy
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# Start the git-annex assistant in every repo listed in
+# ~/.config/git-annex/autostart (sway doesn't run XDG autostart entries).
+exec --no-startup-id git annex assistant --autostart
+
 # Use wpctl to adjust volume in WirePlumber/PipeWire.
 #set $refresh_i3status pkill -RTMIN+10 i3blocks
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
