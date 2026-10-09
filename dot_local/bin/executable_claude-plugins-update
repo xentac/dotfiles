@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Refresh every Claude Code marketplace, then update every installed plugin in
+# every scope and project it is installed in (`claude plugin update` alone only
+# touches the project you run it from).
+set -euo pipefail
+cfg=${CLAUDE_CONFIG_DIR:-$HOME/.claude}
+
+claude plugin marketplace update
+jq -r '.plugins | to_entries[] | .key as $id | .value[]
+       | [$id, .scope, (.projectPath // "")] | @tsv' \
+  "$cfg/plugins/installed_plugins.json" |
+while IFS=$'\t' read -r id scope path; do
+  if [[ -z $path ]]; then
+    claude plugin update "$id" --scope "$scope" </dev/null
+  elif [[ -d $path ]]; then
+    (cd "$path" && claude plugin update "$id" --scope "$scope" </dev/null)
+  else
+    echo "skipping $id: $path no longer exists" >&2
+  fi
+done
