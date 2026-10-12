@@ -1,6 +1,8 @@
+# Status line, then input on its own line
+
 [custom.jj]
 when = "jj-starship detect"
-shell = ["jj-starship"]
+shell = ["jj-starship", "--truncate-name", "20"]
 format = "$output "
 
 [git_branch]
@@ -11,3 +13,41 @@ disabled = true
 
 [git_status]
 disabled = true
+
+# jj repos are always a detached HEAD to git; jj-starship already shows the ID
+[git_commit]
+disabled = true
+
+[status]
+disabled = false
+symbol = "✘ "
+pipestatus = true
+map_symbol = true
+
+[nix_shell]
+heuristic = true
+format = "via [$symbol$state( \\($name\\))]($style) "
+
+[direnv]
+disabled = false
+
+[shlvl]
+disabled = false
+threshold = 3
+symbol = "↕ "
+
+[cmd_duration]
+min_time = 3_000
+show_notifications = true
+min_time_to_notify = 30_000
+
+[directory]
+truncation_length = 4
+truncate_to_repo = true
+fish_style_pwd_dir_length = 1
+
+[hostname]
+ssh_only = false
+
+[sudo]
+disabled = false
