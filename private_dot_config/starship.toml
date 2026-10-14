@@ -38,7 +38,7 @@ symbol = "↕ "
 
 [cmd_duration]
 min_time = 3_000
-show_notifications = true
+show_notifications = false
 min_time_to_notify = 30_000
 
 [directory]
