@@ -1,0 +1,13 @@
+#!/bin/sh
+# Prompt for a name and rename the focused workspace to "N:<name>", keeping
+# its number so `workspace number N` bindings still reach it. An empty name
+# resets it to plain "N"; Escape leaves it alone.
+
+num=$(swaymsg -t get_workspaces | jq -r '.[] | select(.focused) | .num')
+name=$(rofi -dmenu -p "name ws $num" </dev/null) || exit 0
+
+if [ -n "$name" ]; then
+    swaymsg "rename workspace to \"$num:$name\""
+else
+    swaymsg "rename workspace to \"$num\""
+fi

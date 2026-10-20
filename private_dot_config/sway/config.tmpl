@@ -183,43 +183,57 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+o focus child
 
+# Workspace names. Fixed ones for stable roles; the rest stay bare numbers
+# and get named per project with $mod+n. `workspace number N` still matches
+# a renamed "N:whatever" workspace.
+set $ws1 "1:web"
+set $ws2 "2:chrome"
+set $ws3 "3:main"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10:chat"
+
 set $dispwork "DP-3"
 set $displaptop "eDP-1"
 
-workspace 1 output $dispwork $displaptop
-workspace 2 output $dispwork $displaptop
-workspace 3 output $dispwork $displaptop
-workspace 4 output $dispwork $displaptop
-workspace 5 output $dispwork $displaptop
-workspace 6 output $displaptop
-workspace 7 output $displaptop
-workspace 8 output $displaptop
-workspace 9 output $displaptop
-workspace 10 output $displaptop
+workspace $ws1 output $dispwork $displaptop
+workspace $ws2 output $dispwork $displaptop
+workspace $ws3 output $dispwork $displaptop
+workspace $ws4 output $dispwork $displaptop
+workspace $ws5 output $dispwork $displaptop
+workspace $ws6 output $displaptop
+workspace $ws7 output $displaptop
+workspace $ws8 output $displaptop
+workspace $ws9 output $displaptop
+workspace $ws10 output $displaptop
 
 # switch to workspace
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Change workspace to next or prev
 bindsym $mod+Mod1+$keyleft workspace prev_on_output
@@ -294,6 +308,9 @@ bindsym Control+Mod1+Delete exec "$screensaver"
 
 {{ if eq .chezmoi.hostname "baxter" -}}
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+{{- else -}}
+# Name the current workspace "N:<name>" (empty input resets it to just N)
+bindsym $mod+n exec /home/xentac/.local/bin/sway-name-workspace
 {{- end }}
 
 # save last workspace - can toggle with mod+tab or mod+num_cur_ws
@@ -361,7 +378,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Make hangouts windows not float
-for_window [instance="^crx_knipolnnllmklapflnccelgolnpehhpl$"] floating disable, move container to workspace number 10
+for_window [instance="^crx_knipolnnllmklapflnccelgolnpehhpl$"] floating disable, move container to workspace number $ws10
 
 # Focus urgent workspace
 bindsym $mod+x [urgent=latest] focus
@@ -370,7 +387,12 @@ bindsym $mod+x [urgent=latest] focus
 # note, separate from the main Obsidian window)
 bindsym $mod+semicolon exec /home/xentac/.local/bin/obsidian-quick-note
 
-assign [instance="^crx_nckgahadagoaajjgafhacjanaoiihapd$"] number 10
+assign [instance="^crx_nckgahadagoaajjgafhacjanaoiihapd$"] workspace number $ws10
+assign [app_id="^(signal|slack|discord)$"] workspace number $ws10
+
+# Jump straight to a chat app inside the tabbed chat workspace
+bindsym $mod+Ctrl+s [app_id="signal"] focus
+bindsym $mod+Ctrl+d [app_id="discord"] focus
 
 {{ if eq .chezmoi.hostname "baxter" -}}
 exec --no-startup-id dex -ae i3
