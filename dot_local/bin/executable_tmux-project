@@ -1,0 +1,76 @@
+#!/bin/sh
+# Fuzzy-pick a project and switch to its tmux session, creating it if needed.
+#
+# Lists running sessions first, then git repos under ~/coding and a few extra
+# directories. Picking a directory reuses a session already rooted there, or
+# starts one named after the directory. Works inside tmux (switches client)
+# or from a bare terminal (attaches).
+
+extra_dirs="$HOME/Documents/neurospicy
+$HOME/Documents/Obsidian Vault
+$HOME/.local/share/chezmoi"
+
+# Running sessions, most urgent Claude state first. Panes are tagged by the
+# claude-tmux-state hook; a session with several Claude panes counts each.
+sessions() {
+    tmux list-panes -a -F '#{session_name}	#{@claude}' 2>/dev/null | awk -F '\t' '
+        function tag(s, state, icon,   c) {
+            c = count[s, state]
+            return c ? "  " icon " " state (c > 1 ? " ×" c : "") : ""
+        }
+        !($1 in seen) {
+            seen[$1]; order[++n] = $1
+            if (length($1) > width) width = length($1)
+        }
+        { count[$1, $2]++ }
+        END {
+            # Pad names to the longest so the tags line up in one column
+            pad = "%-" width "s"
+            for (i = 1; i <= n; i++) {
+                s = order[i]
+                rank = count[s, "blocked"] ? 0 : count[s, "waiting"] ? 1 \
+                    : count[s, "working"] ? 2 : 3
+                tags = tag(s, "blocked", "✋") tag(s, "waiting", "💬") \
+                    tag(s, "working", "⏳")
+                sub(/^ +/, "", tags)
+                print rank " ● " (tags ? sprintf(pad, s) "\t" tags : s)
+            }
+        }' | sort -s -k1,1n | cut -d' ' -f2-
+}
+
+candidates() {
+    sessions
+    {
+        find "$HOME/coding" -maxdepth 3 -name .git -prune -printf '%h\n' 2>/dev/null
+        printf '%s\n' "$extra_dirs" | while IFS= read -r d; do
+            [ -d "$d" ] && printf '%s\n' "$d"
+        done
+    } | sort -u | sed "s|^$HOME|~|"
+}
+
+choice=$(candidates | fzf --reverse --prompt='project> ') || exit 0
+
+case "$choice" in
+    "● "*)
+        name=${choice#● }
+        name=${name%%	*}
+        name=${name%"${name##*[! ]}"} # drop the alignment padding
+        ;;
+    *)
+        dir="$HOME${choice#\~}"
+        name=$(tmux list-sessions -F '#{session_path}	#{session_name}' 2>/dev/null \
+            | awk -F '\t' -v d="$dir" '$1 == d { print $2; exit }')
+        if [ -z "$name" ]; then
+            # tmux doesn't allow . or : in session names
+            name=$(basename "$dir" | tr '.: ' '___')
+            tmux has-session -t "=$name" 2>/dev/null \
+                || tmux new-session -d -s "$name" -c "$dir"
+        fi
+        ;;
+esac
+
+if [ -n "$TMUX" ]; then
+    tmux switch-client -t "=$name"
+else
+    tmux attach-session -t "=$name"
+fi
