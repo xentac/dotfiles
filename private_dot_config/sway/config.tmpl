@@ -41,8 +41,8 @@ font pango:Font Awesome 7 Free Solid 10, pango:Terminus 10
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-#exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/$USER/bin/locker.sh
-#exec --no-startup-id $HOME/bin/screensaver.sh
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/$USER/.local/bin/locker.sh
+#exec --no-startup-id $HOME/.local/bin/screensaver.sh
 {{- if eq .chezmoi.hostname "baxter" }}
 exec --no-startup-id xset -dpms s 0
 {{- end }}
