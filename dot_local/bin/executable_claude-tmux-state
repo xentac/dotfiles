@@ -8,8 +8,16 @@
 cat >/dev/null # drain the hook's JSON payload
 [ -n "$TMUX_PANE" ] || exit 0
 
+old=$(tmux show-options -pqv -t "$TMUX_PANE" @claude 2>/dev/null)
+
 case "$1" in
     clear) tmux set-option -pu -t "$TMUX_PANE" @claude ;;
     *) tmux set-option -p -t "$TMUX_PANE" @claude "$1" ;;
 esac 2>/dev/null
+
+# Refresh the phone page (claude-sessions-page), but only on a change:
+# PostToolUse fires on every tool call. Start and end always refresh.
+if [ "$1" = clear ] || [ "$1" != "$old" ]; then
+    "$HOME/.local/bin/claude-sessions-page" >/dev/null 2>&1 &
+fi
 exit 0

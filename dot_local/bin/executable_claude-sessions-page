@@ -1,0 +1,129 @@
+#!/bin/sh
+# Write a phone-friendly page listing the live Claude Code sessions, grouped
+# by folder and tmux session, each linking to its Remote Control session on
+# claude.ai. tailscale serve publishes it on the tailnet (see nixos-config
+# modules/desktop/networking.nix).
+#
+# Sources: ~/.claude/sessions/<pid>.json, which Claude Code writes for each
+# running session (undocumented, so a Claude update can change it), plus the
+# @claude pane option and pane title from tmux. claude-tmux-state calls this
+# whenever a pane's state changes.
+
+out_dir="${XDG_STATE_HOME:-$HOME/.local/state}/claude-sessions"
+mkdir -p "$out_dir"
+tmp=$(mktemp "$out_dir/.index.XXXXXX") || exit 1
+trap 'rm -f "$tmp"' EXIT
+
+# Only sessions whose process is still running; a crash leaves the file behind
+live() {
+    for f in "$HOME"/.claude/sessions/*.json; do
+        [ -e "$f" ] || continue
+        pid=$(basename "$f" .json)
+        [ -d "/proc/$pid" ] && cat "$f"
+    done
+}
+
+panes() {
+    tmux list-panes -a -F '#{pane_id}	#{session_name}	#{session_path}	#{window_index}	#{@claude}	#{pane_title}' 2>/dev/null
+}
+
+live | jq -s -r \
+    --arg home "$HOME" \
+    --arg now "$(date '+%H:%M:%S')" \
+    --arg panes "$(panes)" '
+    # pane_id -> tmux details
+    ($panes | split("\n") | map(select(. != "") | split("\t")
+        | {key: .[0], value: {session: .[1], path: .[2], window: .[3],
+                              state: .[4], title: .[5]}}) | from_entries) as $p
+    | def tilde: if startswith($home) then "~" + .[($home | length):] else . end;
+      def rank: {blocked: 0, waiting: 1, working: 2}[. // ""] // 3;
+      def icon: {blocked: "✋", waiting: "💬", working: "⏳"}[. // ""] // "·";
+    # Background sessions without a Remote Control link are subagents
+    map(select(.kind == "interactive" or .bridgeSessionId != null))
+    | map(
+        (.tmux // "" | split(".")[-1]) as $pane
+        | ($p[$pane // ""] // {}) as $t
+        # The hook state is sharper than the busy/idle in the file
+        | ($t.state // "" | if . == "" then null else . end) as $hook
+        | {
+            state: ($hook // (if .status == "busy" then "working" else .status end)),
+            # Claude puts a spinner glyph in front of its title
+            title: ($t.title // "" | sub("^[^[:alnum:]]+"; "")
+                    | if . == "" or . == "Claude Code" then null else . end),
+            session: ($t.session // (.cwd | split("/")[-1])),
+            root: ($t.path // "" | if . == "" then null else . end) // .cwd,
+            bg: (.kind == "bg"),
+            window: $t.window,
+            cwd: .cwd,
+            name: .name,
+            url: (if .bridgeSessionId then "https://claude.ai/code/" + .bridgeSessionId else null end)
+        }
+        | .label = (.title // .name)
+    )
+    # A conversation moved to the background leaves its old process in the
+    # tmux pane without a link, titled with the background session name.
+    # Show one row: the tmux window of the pane, the link of the session.
+    | . as $rows
+    | def viewer($b): $rows | map(select((.bg | not) and .url == null
+          and .cwd == $b.cwd and .label == $b.label)) | first;
+    map(if .bg then (viewer(.) as $v | if $v then
+            . + {session: $v.session, root: $v.root, window: $v.window} else . end)
+        elif .url == null and (. as $i | [$rows[] | select(.bg)]
+            | any(.cwd == $i.cwd and .label == $i.label))
+        then empty else . end)
+    | map(.group = (.root | split("/")[:-1] | join("/") | tilde))
+    | group_by(.group)
+    | map({group: .[0].group, best: (map(.state | rank) | min),
+           projects: (group_by(.session) | map({session: .[0].session,
+               best: (map(.state | rank) | min),
+               rows: sort_by(.state | rank)}) | sort_by(.best, .session))})
+    | sort_by(.best, .group) as $groups
+    | ([.[] | select(.state == "blocked" or .state == "waiting")] | length) as $attention
+    | "<!doctype html>
+<html lang=\"en\"><head><meta charset=\"utf-8\">
+<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+<meta http-equiv=\"refresh\" content=\"15\">
+<title>" + (if $attention > 0 then "(\($attention)) " else "" end) + "Claude sessions</title>
+<style>
+:root { --bg: #fafaf9; --fg: #1c1917; --muted: #78716c; --line: #e7e5e4; --card: #fff;
+        --blocked: #dc2626; --waiting: #2563eb; --working: #a16207; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0c0a09; --fg: #e7e5e4; --muted: #a8a29e; --line: #292524; --card: #1c1917;
+          --blocked: #f87171; --waiting: #60a5fa; --working: #facc15; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 16px; background: var(--bg); color: var(--fg);
+       font: 16px/1.4 system-ui, sans-serif; }
+h1 { font-size: 1.1rem; margin: 0 0 12px; display: flex; justify-content: space-between; }
+h1 small { color: var(--muted); font-weight: normal; }
+h2 { font-size: .8rem; color: var(--muted); font-weight: 600; margin: 20px 0 6px;
+     text-transform: uppercase; letter-spacing: .04em; }
+h3 { font-size: .95rem; margin: 10px 0 4px; }
+a.row { display: flex; gap: 10px; align-items: baseline; padding: 12px; margin: 0 0 6px;
+        background: var(--card); border: 1px solid var(--line); border-left-width: 4px;
+        border-radius: 8px; color: inherit; text-decoration: none; }
+a.row.blocked { border-left-color: var(--blocked); }
+a.row.waiting { border-left-color: var(--waiting); }
+a.row.working { border-left-color: var(--working); }
+.row .t { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.row .m { color: var(--muted); font-size: .8rem; }
+.empty { color: var(--muted); }
+</style></head><body>
+<h1>Claude sessions <small>\($now)</small></h1>
+" + (if ($groups | length) == 0 then "<p class=\"empty\">No live sessions.</p>" else
+        ($groups | map(
+            "<h2>\(.group | @html)</h2>\n" + (.projects | map(
+                "<h3>\(.session | @html)</h3>\n" + (.rows | map(
+                    "<a class=\"row \(.state | @html)\"" + (if .url then " href=\"\(.url | @html)\"" else "" end) + ">"
+                    + "<span>\(.state | icon)</span><span class=\"t\">\(.title // .name | @html)"
+                    + "<br><span class=\"m\">\(.state | @html)"
+                    + (if .window then " · window \(.window)" elif .bg then " · background" else "" end)
+                    + (if .cwd != .root then " · \(.cwd | tilde | @html)" else "" end)
+                    + "</span></span></a>") | join("\n"))
+            ) | join("\n"))
+        ) | join("\n")) end) + "
+</body></html>"
+' >"$tmp" || exit 1
+
+chmod 644 "$tmp"
+mv "$tmp" "$out_dir/index.html"
