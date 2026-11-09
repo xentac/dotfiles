@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Torn Armoury
+Comment=Torn City faction armoury as a Chrome app window
+Exec=google-chrome-stable "--app=https://www.torn.com/factions.php?step=your#/tab=armoury"
+Icon=google-chrome
+Terminal=false
+Categories=Game;
+StartupWMClass=chrome-www.torn.com__factions.php-Default
