@@ -1,0 +1,16 @@
+#!/bin/sh
+# Reset the focused floating window to the obsidian-quick-note popup size and
+# center it. It acts on the outer floating container, so it also works when
+# the focused window sits inside a tabbed or split floating container.
+#
+# Keep this size in sync with obsidian-quick-note.
+
+con_id=$(swaymsg -t get_tree | jq -r '
+  def find($fc):
+    (if .type == "floating_con" then .id else $fc end) as $f
+    | if .focused then $f
+      else (.nodes[]?, .floating_nodes[]?) | find($f) end;
+  find(null) // empty')
+
+[ -n "$con_id" ] || exit 0
+swaymsg "[con_id=$con_id] resize set 60 ppt 80 ppt, move position center" >/dev/null

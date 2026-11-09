@@ -31,6 +31,7 @@ while [ "$i" -lt 100 ]; do
     con_id=$(swaymsg -t get_tree \
         | jq -r --argjson before "$before" "$APP_FILTER - \$before | first // empty")
     if [ -n "$con_id" ]; then
+        # Keep this size in sync with sway-float-reset (resize mode, key 0).
         swaymsg "[con_id=$con_id] mark $MARK, floating enable, resize set 60 ppt 80 ppt, move position center, move scratchpad, scratchpad show"
         # Obsidian also requests activation on the main window when handling
         # the URI, which sway records as an urgency hint ($mod+x bait). Clear
