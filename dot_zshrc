@@ -2,7 +2,7 @@ export EDITOR=nvim
 
 # Personal scripts managed by chezmoi (dot_local/bin).
 typeset -U path
-path=(~/.local/bin $path)
+path=(~/.local/bin ~/go/bin $path)
 
 # Emacs-style line editing (EDITOR=nvim otherwise makes zsh default to vi mode).
 bindkey -e
